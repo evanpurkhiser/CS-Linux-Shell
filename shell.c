@@ -4,12 +4,27 @@
 #include <string.h>
 #include <errno.h>
 
+#define MAX_COMMAND_LENGTH 80
+
+
 int main(int argc, char *argv[], char *envp[])
 {
-	char hostname[1024];
-	gethostname(hostname, sizeof hostname);
+	char input_command[MAX_COMMAND_LENGTH];
 
-	printf("%s (%s)%% ", hostname, getenv("USER"));
+	while (1)
+	{
+		// Get the hostname of the machine
+		char hostname[1024];
+		gethostname(hostname, sizeof hostname);
+
+		// Display the command prompt
+		printf("%s (%s)%% ", hostname, getenv("USER"));
+
+		// Wait for user input
+		fgets(input_command, MAX_COMMAND_LENGTH, stdin);
+	}
+
+
 
 	return 0;
 }
