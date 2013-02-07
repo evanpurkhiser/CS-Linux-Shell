@@ -4,7 +4,8 @@
 #include <string.h>
 #include <errno.h>
 
-#define MAX_COMMAND_LENGTH 80
+#include "utils/parse_command.h"
+#include "commands/commands.h"
 
 
 int main(int argc, char *argv[], char *envp[])
@@ -21,7 +22,13 @@ int main(int argc, char *argv[], char *envp[])
 		printf("%s (%s)%% ", hostname, getenv("USER"));
 
 		// Wait for user input
-		fgets(input_command, MAX_COMMAND_LENGTH, stdin);
+		fgets(input_command, sizeof input_command, stdin);
+
+
+
+
+
+
 	}
 
 
