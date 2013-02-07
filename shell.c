@@ -10,7 +10,7 @@
 int main(int argc, char* argv[])
 {
 	char input_command[MAX_COMMAND_LENGTH];
-	struct command_t* command;
+	struct command_t command;
 
 	while (1)
 	{
@@ -25,10 +25,7 @@ int main(int argc, char* argv[])
 		fgets(input_command, sizeof input_command, stdin);
 
 		// Parse the command input into the command_t struct
-		parse_command(command, input_command);
-
-
-
+		parse_command(&command, input_command);
 
 
 	}
