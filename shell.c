@@ -7,8 +7,7 @@
 #include "utils/parse_command.h"
 #include "commands/commands.h"
 
-
-int main(int argc, char *argv[], char *envp[])
+int main(int argc, char* argv[])
 {
 	char input_command[MAX_COMMAND_LENGTH];
 	struct command_t* command;
