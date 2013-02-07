@@ -8,16 +8,17 @@ void parse_command(struct command_t* command, char* command_string)
 	char** argv;
 	char** cmd_ptr = &command_string;
 
+	strncpy(command->command, command_string, MAX_COMMAND_LENGTH);
+
 	do
 	{
 		command->argv[argc] = (char*) malloc(MAX_ARGUMENT_LENGTH);
 	}
-	while (0);
+	while ((command->argv[argc++] = strsep(cmd_ptr, WHITESPACE_CHARS)) != 0);
 
 	// Free up that last bit of memory we malloced, it won't have been used
 	free(command->argv[--argc]);
 
-	command->argc    = argc;
-	command->name    = command->argv[0];
-	command->command = command_string;
+	command->argc = argc;
+	command->name = command->argv[0];
 }

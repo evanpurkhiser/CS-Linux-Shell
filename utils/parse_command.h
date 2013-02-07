@@ -8,7 +8,7 @@
 
 struct command_t
 {
-	char* command;
+	char  command[MAX_COMMAND_LENGTH];
 	char* name;
 	int   argc;
 	char* argv[MAX_ARGUMENT_COUNT];
