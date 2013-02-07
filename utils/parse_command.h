@@ -1,3 +1,6 @@
+#ifndef UTIL_PARSE_COMMAND_H
+#define UTIL_PARSE_COMMAND_H
+
 #define MAX_COMMAND_LENGTH 80
 #define MAX_NUM_ARGS       64
 
@@ -9,3 +12,5 @@ struct command_t
 };
 
 struct command_t* parse_command(const char* const command);
+
+#endif
