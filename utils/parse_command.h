@@ -6,11 +6,17 @@
 
 struct command_t
 {
-	const char* command;
-	const int   argc;
-	const char* argv[MAX_NUM_ARGS];
+	char* command;
+	int   argc;
+	char* argv[MAX_NUM_ARGS];
 };
 
-struct command_t* parse_command(const char* const command);
+/**
+ * Parse a command string into the command_t struct
+ *
+ * @param The command struct to modify
+ * @param The command string
+ */
+void parse_command(struct command_t*, const char* const);
 
 #endif

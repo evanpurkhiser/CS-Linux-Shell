@@ -11,6 +11,7 @@
 int main(int argc, char *argv[], char *envp[])
 {
 	char input_command[MAX_COMMAND_LENGTH];
+	struct command_t* command;
 
 	while (1)
 	{
@@ -24,6 +25,8 @@ int main(int argc, char *argv[], char *envp[])
 		// Wait for user input
 		fgets(input_command, sizeof input_command, stdin);
 
+		// Parse the command input into the command_t struct
+		parse_command(command, input_command);
 
 
 
