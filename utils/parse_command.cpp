@@ -1,24 +1,26 @@
-#include <stdlib.h>
-#include <string.h>
+#include <sstream>
+#include <algorithm>
+#include <iterator>
+
 #include "parse_command.hpp"
 
-void parse_command(struct command_t* command, char* command_string)
+command parse_command(std::string input_command)
 {
-	int argc = 0;
-	char** argv;
-	char** cmd_ptr = &command_string;
+	// Tokenize the input command into a vector
+	std::istringstream iss(input_command);
+	std::vector<std::string> argv;
 
-	strncpy(command->command, command_string, MAX_COMMAND_LENGTH);
+	copy(std::istream_iterator<std::string>(iss),
+	     std::istream_iterator<std::string>(),
+	     std::back_inserter<std::vector<std::string> >(argv));
 
-	do
-	{
-		command->argv[argc] = (char*) malloc(MAX_ARGUMENT_LENGTH);
-	}
-	while ((command->argv[argc++] = strsep(cmd_ptr, WHITESPACE_CHARS)) != 0);
+	command command;
 
-	// Free up that last bit of memory we malloced, it won't have been used
-	free(command->argv[--argc]);
+	// Setup the command struct
+	command.command = input_command;
+	command.argv    = argv;
+	command.argc    = command.argv.size();
+	command.name    = command.argv[0];
 
-	command->argc = argc;
-	command->name = command->argv[0];
+	return command;
 }

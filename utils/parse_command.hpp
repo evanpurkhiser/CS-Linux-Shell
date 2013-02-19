@@ -1,28 +1,23 @@
 #ifndef UTIL_PARSE_COMMAND_HPP
 #define UTIL_PARSE_COMMAND_HPP
 
-#define MAX_COMMAND_LENGTH  80
-#define MAX_ARGUMENT_LENGTH 16
-#define MAX_ARGUMENT_COUNT  64
-#define WHITESPACE_CHARS    " \t\n"
+#include <string>
+#include <vector>
 
-struct command_t
+struct command
 {
-	char  command[MAX_COMMAND_LENGTH];
-	char* name;
-	int   argc;
-	char* argv[MAX_ARGUMENT_COUNT];
+	std::string              command;
+	std::string              name;
+	int                      argc;
+	std::vector<std::string> argv;
 };
 
 /**
- * Parse a command string into the command_t struct.
+ * Parse a command string into a command struct
  *
- * The user is responsable to free the memory used by the argv char** once it is
- * no longer needed
- *
- * @param The command struct to modify
- * @param The command string
+ * @param  string The command to parse
+ * @return        The command struct
  */
-void parse_command(struct command_t*, char*);
+command parse_command(std::string);
 
 #endif

@@ -3,8 +3,7 @@
 #include <cstdio>
 #include <cstdlib>
 
-
-
+#include "utils/parse_command.hpp"
 
 int main(int argc, char* argv[])
 {
@@ -18,20 +17,15 @@ int main(int argc, char* argv[])
 		printf("%s (%s)%% ", hostname, getenv("USER"));
 
 		// Read the use input into the command string
-		std::string command;
-		std::getline(std::cin, command);
+		std::string input_command;
+		std::getline(std::cin, input_command);
 
 		// Ignore empty commands
-		if (command.empty()) continue;
+		if (input_command.empty()) continue;
 
-
-
-
-
-		std::cout << "whoo!";
+		// Parse the command into the command struct
+		command command = parse_command(input_command);
 	}
-
-
 
 	return 0;
 }
