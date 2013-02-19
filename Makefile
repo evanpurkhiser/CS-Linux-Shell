@@ -1,11 +1,11 @@
-SRC=$(wildcard utils/*.c) $(wildcard commands/*.c)
+SRC=$(wildcard utils/*.cpp) $(wildcard commands/*.cpp)
 .PHONY: clean test
 
 all: bin/shell
 
-bin/shell: shell.c $(SRC)
+bin/shell: shell.cpp $(SRC)
 	mkdir -p bin
-	gcc $^ -o bin/shell
+	g++ $^ -o bin/shell
 
 clean:
 	rm -f *.o bin/*

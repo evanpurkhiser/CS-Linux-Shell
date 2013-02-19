@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
-#include "parse_command.h"
+#include "parse_command.hpp"
 
 void parse_command(struct command_t* command, char* command_string)
 {
