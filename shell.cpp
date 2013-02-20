@@ -47,7 +47,7 @@ std::string Shell::prompt()
 
 	std::ostringstream prompt;
 
-	prompt << hostname << "(" << getenv("USER") << ")$ ";
+	prompt << hostname << "(" << getenv("USER") << ")% ";
 
 	return prompt.str();
 }
