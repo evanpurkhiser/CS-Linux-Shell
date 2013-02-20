@@ -104,7 +104,10 @@ int Shell::execute(Shell::command command)
 
 		// Because the argv_c vector stores the C-strings in order we can
 		// simply de-refrence the first element of the argv_c vector
-		execvp(command.argv_c[0], (char * const *) &command.argv_c[0]);
+		if (execvp(command.argv_c[0], (char * const *) &command.argv_c[0]) < 0)
+		{
+			std::cerr << command.name << ": command not found\n";
+		}
 	}
 	else
 	{
