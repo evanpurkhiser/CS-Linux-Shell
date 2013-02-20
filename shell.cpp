@@ -77,8 +77,22 @@ int Shell::execute(std::string input_command)
 	return execute(parse_command(input_command));
 }
 
-int Shell::execute(Shell::command)
+int Shell::execute(Shell::command command)
 {
+	// Check if the command is a built in function of the shell
+	int(*internal_call)() = commands::internal_commands()[command.name];
+
+	if (internal_call != 0)
+	{
+		return internal_call();
+	}
+
+
+
+
+
+
+
 
 }
 
