@@ -5,6 +5,7 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <sys/wait.h>
 
 #include "shell.hpp"
 #include "commands.hpp"
@@ -96,13 +97,19 @@ int Shell::execute(Shell::command command)
 		return internal_call();
 	}
 
+	if (fork() == 0)
+	{
+		// execvp always expects the last argument to be a null terminator
+		command.argv_c.push_back(0);
 
-
-
-
-
-
-
+		// Because the argv_c vector stores the C-strings in order we can
+		// simply de-refrence the first element of the argv_c vector
+		execvp(command.argv_c[0], (char * const *) &command.argv_c[0]);
+	}
+	else
+	{
+		wait(0);
+	}
 }
 
 /**
