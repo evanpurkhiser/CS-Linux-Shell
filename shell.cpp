@@ -7,6 +7,7 @@
 #include <string>
 
 #include "shell.hpp"
+#include "commands.hpp"
 
 Shell::Shell() : input(std::cin), output(std::cout)
 { }
