@@ -14,10 +14,11 @@ class Shell
 		 */
 		struct command
 		{
-			std::string              command;
-			std::string              name;
-			int                      argc;
-			std::vector<std::string> argv;
+			std::string               command;
+			std::string               name;
+			int                       argc;
+			std::vector<std::string>  argv;
+			std::vector<const char *> argv_c;
 
 			/**
 			 * Check if the command is to be executed in the background by

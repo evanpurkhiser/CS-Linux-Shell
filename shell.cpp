@@ -53,7 +53,7 @@ std::string Shell::prompt()
 
 Shell::command Shell::parse_command(std::string input_command)
 {
-	// Tokenize the input command into a vector
+	// Tokenize the input command into a vector of strings
 	std::istringstream iss(input_command);
 	std::vector<std::string> argv;
 
@@ -61,13 +61,22 @@ Shell::command Shell::parse_command(std::string input_command)
 	     std::istream_iterator<std::string>(),
 	     std::back_inserter<std::vector<std::string> >(argv));
 
-	command command;
+	// We also want the arguments as a vector of C style strings
+	std::vector<const char *> argv_c;
+
+	for (int i = 0; i < argv.size(); ++i)
+	{
+		argv_c.push_back(argv[i].c_str());
+	}
 
 	// Setup the command struct
+	command command;
+
 	command.command = input_command;
+	command.name    = argv[0];
+	command.argc    = argv.size();
 	command.argv    = argv;
-	command.argc    = command.argv.size();
-	command.name    = command.argv[0];
+	command.argv_c  = argv_c;
 
 	return command;
 }
