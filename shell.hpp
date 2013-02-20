@@ -30,17 +30,9 @@ class Shell
 		};
 
 		/**
-		 * Construct that defaults the shell to read from std::cin and std::cout
+		 * Construct the shell object
 		 */
 		Shell();
-
-		/**
-		 * Construct the shell passing in the input and output streams
-		 *
-		 * @param std::istream Input stream
-		 * @param std::ostream Output stream
-		 */
-		Shell(std::istream &, std::ostream &);
 
 		/**
 		 * Continously display a input prompt for a user to execute commands
@@ -79,11 +71,6 @@ class Shell
 		 * @return The exit status of the command
 		 */
 		int execute(command);
-
-	private:
-
-		std::istream & input;
-		std::ostream & output;
 };
 
 #endif

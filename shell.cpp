@@ -9,10 +9,7 @@
 #include "shell.hpp"
 #include "commands.hpp"
 
-Shell::Shell() : input(std::cin), output(std::cout)
-{ }
-
-Shell::Shell(std::istream &in, std::ostream &out) : input(in), output(out)
+Shell::Shell()
 { }
 
 bool Shell::command::is_background()
@@ -25,11 +22,11 @@ int Shell::start()
 	while(1)
 	{
 		// Display the user prompt
-		output << prompt();
+		std::cout << prompt();
 
 		// Read the use input into the command string
 		std::string input_command;
-		std::getline(input, input_command);
+		std::getline(std::cin, input_command);
 
 		// Ignore empty inputs
 		if (input_command.empty()) continue;
