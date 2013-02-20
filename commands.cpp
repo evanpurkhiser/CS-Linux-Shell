@@ -1,4 +1,5 @@
 #include <map>
+#include <iostream>
 
 #include "commands.hpp"
 
@@ -35,7 +36,9 @@ namespace commands
 
 		int pause()
 		{
+			std::cout << "Console paused. Press <ENTER> to resume.";
 
+			while (std::cin.get() != '\n');
 		}
 
 		int dir()
