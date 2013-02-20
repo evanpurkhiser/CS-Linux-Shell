@@ -1,9 +1,8 @@
-SRC=$(wildcard utils/*.cpp) $(wildcard commands/*.cpp)
 .PHONY: clean test
 
 all: bin/shell
 
-bin/shell: shell.cpp $(SRC)
+bin/shell: $(wildcard *.cpp)
 	mkdir -p bin
 	g++ $^ -o bin/shell
 

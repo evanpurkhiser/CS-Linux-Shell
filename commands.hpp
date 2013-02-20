@@ -2,80 +2,88 @@
 #define COMMANDS_HPP
 
 #include <map>
+#include <string>
 
 namespace commands
 {
-	std::map<std::string, int(*)()> built_in;
-
 	/**
-	 * Terminate the shell after killing all children processes.
-	 *
-	 * @return Exit status
+	 * Get a list of the internal commands
 	 */
-	int exit();
+	std::map<std::string, int(*)()> internal_commands();
 
-	/**
-	 * Display the manual / help page for the shell
-	 *
-	 * @return Exit status
-	 */
-	int help();
+	namespace internal
+	{
+		/**
+		 * Terminate the shell after killing all children processes.
+		 *
+		 * @return Exit status
+		 */
+		int exit();
 
-	/**
-	 * Display the message passed to echo (with a trailing newline)
-	 *
-	 * @return Exit status
-	 */
-	int echo();
+		/**
+		 * Display the manual / help page for the shell
+		 *
+		 * @return Exit status
+		 */
+		int help();
 
-	/**
-	 * Clear the screen
-	 *
-	 * @return Exit status
-	 */
-	int clr();
+		/**
+		 * Display the message passed to echo (with a trailing newline)
+		 *
+		 * @return Exit status
+		 */
+		int echo();
 
-	/**
-	 * Terminate all background prcesses
-	 *
-	 * @return Exit status
-	 */
-	int killall();
+		/**
+		 * Clear the screen
+		 *
+		 * @return Exit status
+		 */
+		int clr();
 
-	/**
-	 * Pauses execution of the shell until the user presses the `<ENTER>` key
-	 *
-	 * @return Exit status
-	 */
-	int pause();
+		/**
+		 * Terminate all background prcesses
+		 *
+		 * @return Exit status
+		 */
+		int killall();
 
-	/**
-	 * Proxy for `ls -l directory`
-	 *
-	 * @return Exit status
-	 */
-	int dir();
+		/**
+		 * Pauses execution of the shell until the user presses the `<ENTER>`
+		 * key
+		 *
+		 * @return Exit status
+		 */
+		int pause();
 
-	/**
-	 * Change the directory
-	 *
-	 * @return Exit status
-	 */
-	int cd();
+		/**
+		 * Proxy for `ls -l directory`
+		 *
+		 * @return Exit status
+		 */
+		int dir();
 
-	/**
-	 * Lists all currently executing background processes
-	 *
-	 * @return Exit status
-	 */
-	int jobs();
+		/**
+		 * Change the directory
+		 *
+		 * @return Exit status
+		 */
+		int cd();
 
-	/**
-	 * Lists all current environment variables
-	 *
-	 * @return Exit status
-	 */
-	int environ();
+		/**
+		 * Lists all currently executing background processes
+		 *
+		 * @return Exit status
+		 */
+		int jobs();
+
+		/**
+		 * Lists all current environment variables
+		 *
+		 * @return Exit status
+		 */
+		int environ();
+	}
 }
 
 #endif
