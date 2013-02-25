@@ -18,7 +18,7 @@ namespace commands
 		 *
 		 * @return Exit status
 		 */
-		int exit();
+		int quit();
 
 		/**
 		 * Display the manual / help page for the shell

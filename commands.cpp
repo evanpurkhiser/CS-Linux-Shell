@@ -9,7 +9,7 @@ namespace commands
 	{
 		std::map<std::string, int(*)()> map;
 
-		int exit()
+		int quit()
 		{
 
 		}
@@ -66,9 +66,9 @@ namespace commands
 	{
 		if (internal::map.empty())
 		{
-			internal::map["quit"]    = &internal::exit;
-			internal::map["exit"]    = &internal::exit;
-			internal::map["logout"]  = &internal::exit;
+			internal::map["quit"]    = &internal::quit;
+			internal::map["exit"]    = &internal::quit;
+			internal::map["logout"]  = &internal::quit;
 			internal::map["help"]    = &internal::help;
 			internal::map["echo"]    = &internal::echo;
 			internal::map["clr"]     = &internal::clr;
