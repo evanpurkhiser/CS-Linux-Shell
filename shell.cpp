@@ -13,11 +13,6 @@
 Shell::Shell()
 { }
 
-bool Shell::command::is_background()
-{
-	return *argv[argc - 1].rbegin() == '&';
-}
-
 int Shell::start()
 {
 	while(1)
@@ -60,6 +55,18 @@ std::string Shell::prompt()
 
 Shell::command Shell::parse_command(std::string input_command)
 {
+	// Setup the command struct
+	command command;
+
+	// This command is a background job if the last character is a '&'
+	command.background = *input_command.rbegin() == '&';
+
+	// Remove the background flag from the command string
+	if (command.background)
+	{
+		input_command.erase(input_command.size() - 1);
+	}
+
 	// Tokenize the input command into a vector of strings
 	std::istringstream iss(input_command);
 	std::vector<std::string> argv;
@@ -75,9 +82,6 @@ Shell::command Shell::parse_command(std::string input_command)
 	{
 		argv_c.push_back(argv[i].c_str());
 	}
-
-	// Setup the command struct
-	command command;
 
 	command.command = input_command;
 	command.name    = argv[0];

@@ -19,15 +19,9 @@ class Shell
 			int                       argc;
 			std::vector<std::string>  argv;
 			std::vector<const char *> argv_c;
+			bool                      background;
+		};
 
-			/**
-			 * Check if the command is to be executed in the background by
-			 * looking at the last parameter and checking for the presence of
-			 * the `&` (ampersand) symbol
-			 *
-			 * @return Should the command be executed in the background?
-			 */
-			bool is_background();
 		};
 
 		/**
