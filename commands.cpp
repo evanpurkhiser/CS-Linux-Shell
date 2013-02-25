@@ -26,7 +26,7 @@ namespace commands
 
 		int clr()
 		{
-
+			std::cout << "\033[2J\033[1;1H";
 		}
 
 		int killall()
