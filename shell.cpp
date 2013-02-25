@@ -29,6 +29,12 @@ int Shell::start()
 		std::string input_command;
 		std::getline(std::cin, input_command);
 
+		// Exit on EOF
+		if (std::cin.eof())
+		{
+			std::cout << (input_command = "exit") << '\n';
+		}
+
 		// Ignore empty inputs
 		if (input_command.empty()) continue;
 
@@ -107,6 +113,7 @@ int Shell::execute(Shell::command command)
 		if (execvp(command.argv_c[0], (char * const *) &command.argv_c[0]) < 0)
 		{
 			std::cerr << command.name << ": command not found\n";
+			exit(1);
 		}
 	}
 	else
