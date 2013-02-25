@@ -4,7 +4,7 @@ all: bin/shell
 
 bin/shell: $(wildcard *.cpp)
 	mkdir -p bin
-	g++ $^ -o bin/shell
+	g++ -std=c++0x $^ -o bin/shell
 
 clean:
 	rm -f *.o bin/*
