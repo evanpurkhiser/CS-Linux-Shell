@@ -104,11 +104,11 @@ int Shell::execute(std::string input_command)
 int Shell::execute(Shell::command command)
 {
 	// Check if the command is a built in function of the shell
-	int(*internal_call)() = commands::internal[command.name];
+	int(*internal_call)(Shell *, Shell::command *) = commands::internal[command.name];
 
 	if (internal_call != 0)
 	{
-		return internal_call();
+		return internal_call(this, &command);
 	}
 
 	if (fork() == 0)

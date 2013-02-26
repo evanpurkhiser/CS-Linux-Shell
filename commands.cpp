@@ -5,7 +5,7 @@
 
 namespace commands
 {
-	std::map<std::string, int(*)()> internal =
+	std::map<std::string, int(*)(Shell *, Shell::command *)> internal =
 	{
 		{"quit",    &quit},
 		{"exit",    &quit},
@@ -21,54 +21,54 @@ namespace commands
 		{"environ", &environ},
 	};
 
-	int quit()
+	int quit(Shell *shell, Shell::command *cmd)
 	{
 
 	}
 
-	int help()
+	int help(Shell *shell, Shell::command *cmd)
 	{
 
 	}
 
-	int echo()
+	int echo(Shell *shell, Shell::command *cmd)
 	{
 
 	}
 
-	int clr()
+	int clr(Shell *shell, Shell::command *cmd)
 	{
 		std::cout << "\033[2J\033[1;1H";
 	}
 
-	int killall()
+	int killall(Shell *shell, Shell::command *cmd)
 	{
 
 	}
 
-	int pause()
+	int pause(Shell *shell, Shell::command *cmd)
 	{
 		std::cout << "Console paused. Press <ENTER> to resume.";
 
 		while (std::cin.get() != '\n');
 	}
 
-	int dir()
+	int dir(Shell *shell, Shell::command *cmd)
 	{
 
 	}
 
-	int cd()
+	int cd(Shell *shell, Shell::command *cmd)
 	{
 
 	}
 
-	int jobs()
+	int jobs(Shell *shell, Shell::command *cmd)
 	{
 
 	}
 
-	int environ()
+	int environ(Shell *shell, Shell::command *cmd)
 	{
 
 	}
