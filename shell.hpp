@@ -22,8 +22,6 @@ class Shell
 			bool                      background;
 		};
 
-		};
-
 		/**
 		 * Construct the shell object
 		 */
