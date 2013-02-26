@@ -1,5 +1,4 @@
 #include <algorithm>
-#include <cstdio>
 #include <cstdlib>
 #include <iterator>
 #include <iostream>
@@ -10,12 +9,12 @@
 #include "shell.hpp"
 #include "commands.hpp"
 
-Shell::Shell()
+Shell::Shell() : exit(false)
 { }
 
 int Shell::start()
 {
-	while(1)
+	while( ! exit)
 	{
 		// Display the user prompt
 		std::cout << prompt();
@@ -38,6 +37,11 @@ int Shell::start()
 	}
 
 	return 0;
+}
+
+void Shell::finish()
+{
+	exit = true;
 }
 
 std::string Shell::prompt()

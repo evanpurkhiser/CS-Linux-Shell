@@ -35,6 +35,11 @@ class Shell
 		virtual int start();
 
 		/**
+		 * Let the shell finish
+		 */
+		virtual void finish();
+
+		/**
 		 * Generate the command prompt text
 		 *
 		 * @return The command prompt text
@@ -64,6 +69,13 @@ class Shell
 		 * @return The exit status of the command
 		 */
 		int execute(command);
+
+	protected:
+
+		/**
+		 * A flag to exit the shell
+		 */
+		bool exit;
 };
 
 #endif
