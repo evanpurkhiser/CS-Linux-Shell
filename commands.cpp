@@ -23,7 +23,7 @@ namespace commands
 
 	int quit(Shell *shell, Shell::command *cmd)
 	{
-
+		shell->finish();
 	}
 
 	int help(Shell *shell, Shell::command *cmd)
