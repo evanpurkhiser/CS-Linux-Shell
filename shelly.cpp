@@ -104,25 +104,27 @@ int Shelly::execute(std::string input_command)
 int Shelly::execute(Shelly::command command)
 {
 	// Check if the command is a built in function of the shell
-	int(*internal_call)(Shelly *, Shelly::command *) = commands::internal[command.name];
+	int(*internal_command)(Shelly *, Shelly::command *);
 
-	if (internal_call != 0)
+	if ((internal_command = commands::internal[command.name]) != 0)
 	{
-		return internal_call(this, &command);
+		return internal_command(this, &command);
 	}
 
-	if (fork() == 0)
+	int pid = fork();
+
+	if (pid == 0)
 	{
 		// execvp always expects the last argument to be a null terminator
 		command.argv_c.push_back(0);
 
 		// Because the argv_c vector stores the C-strings in order we can
 		// simply de-refrence the first element of the argv_c vector
-		if (execvp(command.argv_c[0], (char * const *) &command.argv_c[0]) < 0)
-		{
-			std::cerr << command.name << ": command not found\n";
-			exit(1);
-		}
+		execvp(command.argv_c[0], (char * const *) &command.argv_c[0]);
+
+		// exec failed, the command was _probably_ not found
+		std::cerr << command.name << ": command not found\n";
+		finish();
 	}
 	else
 	{
