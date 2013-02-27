@@ -63,7 +63,7 @@ Shell::command Shell::parse_command(std::string input_command)
 	command command;
 
 	// This command is a background job if the last character is a '&'
-	command.background = *input_command.rbegin() == '&';
+	command.background = input_command.back() == '&';
 
 	// Remove the background flag from the command string
 	if (command.background)
