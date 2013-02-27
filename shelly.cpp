@@ -50,11 +50,7 @@ std::string Shelly::prompt()
 	char hostname[1024];
 	gethostname(hostname, sizeof hostname);
 
-	std::ostringstream prompt;
-
-	prompt << hostname << "(" << getenv("USER") << ")% ";
-
-	return prompt.str();
+	return std::string() + hostname + "(" + getenv("USER") + ")% ";
 }
 
 Shelly::command Shelly::parse_command(std::string input_command)
