@@ -1,5 +1,7 @@
 #include <map>
 #include <iostream>
+#include <fstream>
+#include <unistd.h>
 
 #include "commands.hpp"
 
@@ -73,6 +75,25 @@ namespace commands
 
 	int environ(Shelly *shell, Shelly::command *cmd)
 	{
+		const std::string shell_token = "SHELL=";
 
+		// Get the path to the shell binary
+		char shell_bin[1024];
+		int end = readlink("/proc/self/exe", shell_bin, sizeof(shell_bin) - 1);
+		shell_bin[end] = '\0';
+
+		// Get the environment variables for this process
+		std::ifstream environment("/proc/self/environ");
+		std::string variable;
+
+		while ( ! std::getline(environment, variable, '\0').eof())
+		{
+			if (variable.substr(0, shell_token.size()) == shell_token)
+			{
+				variable = shell_token + shell_bin;
+			}
+
+			std::cout << variable << '\n';
+		}
 	}
 }
