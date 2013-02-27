@@ -55,7 +55,7 @@ namespace commands
 
 	int dir(Shell *shell, Shell::command *cmd)
 	{
-
+		system(("/bin/ls -l " + cmd->argv[1]).c_str());
 	}
 
 	int cd(Shell *shell, Shell::command *cmd)
