@@ -41,6 +41,7 @@ int Shelly::start()
 
 void Shelly::finish()
 {
+	commands::killall(this, {});
 	exit = true;
 }
 
