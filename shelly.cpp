@@ -125,7 +125,15 @@ int Shelly::execute(Shelly::command command)
 	}
 	else
 	{
-		wait(0);
+		if (command.background)
+		{
+			background_jobs.push_back({command, pid});
+			std::cout << "PID: [" << pid << "] " << command.command << '\n';
+		}
+		else
+		{
+			wait(0);
+		}
 	}
 }
 

@@ -2,8 +2,8 @@
 #define SHELLY_HPP
 
 #include <string>
-#include <iostream>
 #include <vector>
+#include <list>
 
 class Shelly
 {
@@ -20,6 +20,15 @@ class Shelly
 			std::vector<std::string>  argv;
 			std::vector<const char *> argv_c;
 			bool                      background;
+		};
+
+		/**
+		 * Defines a background job
+		 */
+		struct job
+		{
+			command cmd;
+			int     pid;
 		};
 
 		/**
@@ -71,6 +80,11 @@ class Shelly
 		int execute(command);
 
 	protected:
+
+		/**
+		 * A list of currently running jobs
+		 */
+		std::list<job> background_jobs;
 
 		/**
 		 * A flag to exit the shell
