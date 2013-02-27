@@ -1,13 +1,13 @@
 .PHONY: clean test
 
-all: bin/shell
+all: bin/shelly
 
-bin/shell: $(wildcard *.cpp)
+bin/shelly: $(wildcard *.cpp)
 	mkdir -p bin
-	g++ -std=c++0x $^ -o bin/shell
+	g++ -std=c++0x $^ -o bin/shelly
 
 clean:
 	rm -f *.o bin/*
 
-test: bin/shell
-	./bin/shell
+test: bin/shelly
+	./bin/shelly
