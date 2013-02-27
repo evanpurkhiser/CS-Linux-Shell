@@ -1,11 +1,11 @@
-#ifndef SHELL_HPP
-#define SHELL_HPP
+#ifndef SHELLY_HPP
+#define SHELLY_HPP
 
 #include <string>
 #include <iostream>
 #include <vector>
 
-class Shell
+class Shelly
 {
 	public:
 
@@ -25,7 +25,7 @@ class Shell
 		/**
 		 * Construct the shell object
 		 */
-		Shell();
+		Shelly();
 
 		/**
 		 * Continously display a input prompt for a user to execute commands

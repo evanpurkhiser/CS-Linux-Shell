@@ -6,13 +6,13 @@
 #include <string>
 #include <sys/wait.h>
 
-#include "shell.hpp"
+#include "shelly.hpp"
 #include "commands.hpp"
 
-Shell::Shell() : exit(false)
+Shelly::Shelly() : exit(false)
 { }
 
-int Shell::start()
+int Shelly::start()
 {
 	while( ! exit)
 	{
@@ -39,12 +39,12 @@ int Shell::start()
 	return 0;
 }
 
-void Shell::finish()
+void Shelly::finish()
 {
 	exit = true;
 }
 
-std::string Shell::prompt()
+std::string Shelly::prompt()
 {
 	// Get the hostname of the machine
 	char hostname[1024];
@@ -57,7 +57,7 @@ std::string Shell::prompt()
 	return prompt.str();
 }
 
-Shell::command Shell::parse_command(std::string input_command)
+Shelly::command Shelly::parse_command(std::string input_command)
 {
 	// Setup the command struct
 	command command;
@@ -96,15 +96,15 @@ Shell::command Shell::parse_command(std::string input_command)
 	return command;
 }
 
-int Shell::execute(std::string input_command)
+int Shelly::execute(std::string input_command)
 {
 	return execute(parse_command(input_command));
 }
 
-int Shell::execute(Shell::command command)
+int Shelly::execute(Shelly::command command)
 {
 	// Check if the command is a built in function of the shell
-	int(*internal_call)(Shell *, Shell::command *) = commands::internal[command.name];
+	int(*internal_call)(Shelly *, Shelly::command *) = commands::internal[command.name];
 
 	if (internal_call != 0)
 	{
@@ -135,7 +135,7 @@ int Shell::execute(Shell::command command)
  */
 int main(int argc, char* argv[])
 {
-	Shell shell;
+	Shelly Shelly;
 
-	return shell.start();
+	return Shelly.start();
 }
