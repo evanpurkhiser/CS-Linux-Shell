@@ -69,7 +69,7 @@ class Shelly
 		 * @param  The command string to execute
 		 * @return The exit status of the command
 		 */
-		int execute(std::string);
+		virtual int execute(std::string);
 
 		/**
 		 * Executes a command by passing a command struct
@@ -77,7 +77,7 @@ class Shelly
 		 * @param  The command to execute
 		 * @return The exit status of the command
 		 */
-		int execute(command);
+		virtual int execute(command);
 
 	protected:
 
