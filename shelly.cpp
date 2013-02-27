@@ -47,11 +47,11 @@ void Shelly::finish()
 
 std::string Shelly::prompt()
 {
-	// Get the hostname of the machine
-	char hostname[1024];
+	char  hostname[1024];
+	char *username = getenv("USER");
 	gethostname(hostname, sizeof hostname);
 
-	return std::string() + hostname + "(" + getenv("USER") + ")% ";
+	return std::string("\e[0;35m") + hostname + "(" + username + ")%\e[0m ";
 }
 
 Shelly::command Shelly::parse_command(std::string input_command)
