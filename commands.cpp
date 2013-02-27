@@ -35,7 +35,15 @@ namespace commands
 
 	int echo(Shelly *shell, Shelly::command *cmd)
 	{
+		for (int i = 1; i < cmd->argv.size(); ++i)
+		{
+			std::cout << cmd->argv[i] << " ";
+		}
 
+		if (cmd->argv.size() > 1)
+		{
+			std::cout << '\n';
+		}
 	}
 
 	int clr(Shelly *shell, Shelly::command *cmd)
