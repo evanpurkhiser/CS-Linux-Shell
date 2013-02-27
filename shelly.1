@@ -1,0 +1,69 @@
+.TH shelly 1  "Febuary 26, 2013" "version 1.0 "USER COMMANDS"
+.SH NAME
+shelly \- A primitive UNIX shell, made with love
+.SH SYNOPSIS
+.B shelly
+.SH DESCRIPTION
+Shelly is a simple shell program designed to be run on GNU/Linux operating
+systems. The shell provides very basic functionality with no configuration. This
+includes some built in commands as well as the ability to disown commands and
+have them run in the background.
+.SS "Built in commands"
+.TP
+\.B
+echo [message]
+Display a line of text
+.TP
+\.B
+clr
+Clear the screen if possible
+.TP
+\.B
+killall
+Terminate all background preccesses
+.TP
+\.B
+pause
+Pauses the execution of the shell until the users presses the <ENTER> key
+.TP
+\.B
+dir [directory]
+List out all of the files in the specified directory in long format. If no
+arguments are given then the current working directory will be assumed.
+.TP
+\.B
+cd [directory]
+Change the current working directory. If no argument is passed the $HOME
+directory will be assumed
+.TP
+\.B
+jobs
+List all currently executing background proccesses
+.TP
+\.B
+environ
+List out all of the environment variables for the shelly process in the format
+VARIABLE=VALUE
+.TP
+\.B
+logut, exit, quit
+Exit the shell
+.SS "Job Control"
+When executing a command from the shelly prompt a `&` can be appended to the
+command to force the command to execute in the background. Shelly will display
+the PID of the background process and them immediately return to a prompt and
+you may continue executing commands. After backgrounding a process each time a
+new prompt is displayed a list will be printed showing the processes that have
+completed since the last time the list was shown.
+.TP
+.B jobs command
+You can use the jobs command to view the current commands that are executing in
+the background
+.TP
+.B killall command
+If you wish to kill all background processes of the shell you can issue the
+killall command
+.SH SEE ALSO
+.B bash(1), sh(1), zsh(1)
+.SH AUTHOR
+Evan M. Purkhiser (evanpurkhiser@gmail.com)
