@@ -60,7 +60,10 @@ namespace commands
 
 	int cd(Shell *shell, Shell::command *cmd)
 	{
-
+		if (chdir(cmd->argv.size() < 2 ? getenv("HOME") : cmd->argv_c[1]) < 0)
+		{
+			std::cout << "Unable to change directory\n";
+		}
 	}
 
 	int jobs(Shell *shell, Shell::command *cmd)
