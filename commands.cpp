@@ -30,7 +30,13 @@ namespace commands
 
 	int help(Shelly *shell, Shelly::command *cmd)
 	{
+		// Get the path to the manual page
+		char bin_path[1024];
+		int size = readlink("/proc/self/exe", bin_path, sizeof(bin_path) - 1);
+		std::string path(bin_path, size);
+		path = path.substr(0, path.find_last_of('/')) + "/../shelly.1";
 
+		system(("/usr/bin/man " + path).c_str());
 	}
 
 	int echo(Shelly *shell, Shelly::command *cmd)
