@@ -84,7 +84,10 @@ namespace commands
 
 	int jobs(Shelly *shell, Shelly::command *cmd)
 	{
-
+		for (auto job : shell->jobs_list())
+		{
+			std::cout << "[" << job.pid << "] " << job.cmd.command << '\n';
+		}
 	}
 
 	int environ(Shelly *shell, Shelly::command *cmd)

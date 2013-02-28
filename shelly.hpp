@@ -84,7 +84,15 @@ class Shelly
 		 */
 		virtual void termiate_jobs();
 
-
+		/**
+		 * Return a list of background jobs. When only completed background
+		 * jobs are asked for, then these jobs will be removed from the
+		 * background jobs list and returned as a std::list of jobs
+		 *
+		 * @param  If true then only return a list of completed background jobs
+		 * @return A list of jobs
+		 */
+		virtual std::list<job> jobs_list(bool = false);
 
 	protected:
 

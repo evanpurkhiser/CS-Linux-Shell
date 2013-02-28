@@ -149,6 +149,16 @@ void Shelly::termiate_jobs()
 	background_jobs.clear();
 }
 
+std::list<Shelly::job> Shelly::jobs_list(bool completed)
+{
+	if ( ! completed)
+	{
+		return background_jobs;
+	}
+
+	// Get completed jobs and remove them from the background_jobs list
+}
+
 /**
  * Begin execution
  */
