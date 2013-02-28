@@ -23,12 +23,14 @@ namespace commands
 		{"environ", &environ},
 	};
 
-	int quit(Shelly *shell, Shelly::command *cmd)
+	int quit(Shelly *shell, Shelly::command *)
 	{
 		shell->finish();
+
+		return 0;
 	}
 
-	int help(Shelly *shell, Shelly::command *cmd)
+	int help(Shelly *, Shelly::command *)
 	{
 		// Get the path to the manual page
 		char bin_path[1024];
@@ -36,10 +38,10 @@ namespace commands
 		std::string path(bin_path, size);
 		path = path.substr(0, path.find_last_of('/')) + "/../shelly.1";
 
-		system(("/usr/bin/man " + path).c_str());
+		return system(("/usr/bin/man " + path).c_str());
 	}
 
-	int echo(Shelly *shell, Shelly::command *cmd)
+	int echo(Shelly *, Shelly::command *cmd)
 	{
 		for (int i = 1; i < cmd->argc; ++i)
 		{
@@ -50,47 +52,59 @@ namespace commands
 		{
 			std::cout << '\n';
 		}
+
+		return 0;
 	}
 
-	int clr(Shelly *shell, Shelly::command *cmd)
+	int clr(Shelly *, Shelly::command *)
 	{
 		std::cout << "\033[2J\033[1;1H";
+
+		return 0;
 	}
 
-	int killall(Shelly *shell, Shelly::command *cmd)
+	int killall(Shelly *shell, Shelly::command *)
 	{
 		shell->termiate_jobs();
+
+		return 0;
 	}
 
-	int pause(Shelly *shell, Shelly::command *cmd)
+	int pause(Shelly *, Shelly::command *)
 	{
 		std::cout << "Console paused. Press <ENTER> to resume.";
 
 		while (std::cin.get() != '\n');
+
+		return 0;
 	}
 
-	int dir(Shelly *shell, Shelly::command *cmd)
+	int dir(Shelly *, Shelly::command *cmd)
 	{
-		system(("/bin/ls -l " + cmd->argv[1]).c_str());
+		return system(("/bin/ls -l " + cmd->argv[1]).c_str());
 	}
 
-	int cd(Shelly *shell, Shelly::command *cmd)
+	int cd(Shelly *, Shelly::command *cmd)
 	{
 		if (chdir(cmd->argc < 2 ? getenv("HOME") : cmd->argv_c[1]) < 0)
 		{
 			std::cout << cmd->name << ": unable to change directory\n";
 		}
+
+		return 0;
 	}
 
-	int jobs(Shelly *shell, Shelly::command *cmd)
+	int jobs(Shelly *shell, Shelly::command *)
 	{
 		for (auto job : shell->jobs_list())
 		{
 			std::cout << "[" << job.pid << "] " << job.cmd.command << '\n';
 		}
+
+		return 0;
 	}
 
-	int environ(Shelly *shell, Shelly::command *cmd)
+	int environ(Shelly *, Shelly::command *)
 	{
 		const std::string shell_token = "SHELL=";
 
@@ -112,5 +126,7 @@ namespace commands
 
 			std::cout << variable << '\n';
 		}
+
+		return 0;
 	}
 }

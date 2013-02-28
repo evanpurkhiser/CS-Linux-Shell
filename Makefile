@@ -4,7 +4,7 @@ all: bin/shelly
 
 bin/shelly: $(wildcard *.cpp)
 	mkdir -p bin
-	g++ -std=c++0x $^ -o bin/shelly
+	g++ -W -Wall -Wextra -pedantic -std=c++0x $^ -o bin/shelly
 
 clean:
 	rm -f *.o bin/*

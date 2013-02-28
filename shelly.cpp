@@ -60,7 +60,7 @@ std::string Shelly::prompt()
 	char *username = getenv("USER");
 	gethostname(hostname, sizeof hostname);
 
-	return std::string("\e[0;35m") + hostname + "(" + username + ")%\e[0m ";
+	return std::string("\033[0;35m") + hostname + "(" + username + ")%\033[0m ";
 }
 
 Shelly::command Shelly::parse_command(std::string input_command)
@@ -194,9 +194,8 @@ std::list<Shelly::job> Shelly::jobs_list(bool completed)
 /**
  * Begin execution
  */
-int main(int argc, char* argv[])
+int main(int, char**)
 {
 	Shelly Shelly;
-
 	return Shelly.start();
 }
