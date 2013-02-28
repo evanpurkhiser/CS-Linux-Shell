@@ -34,7 +34,7 @@ int Shelly::start()
 		// List out any jobs that have completed
 		for (auto job : jobs_list(true))
 		{
-			std::cout << "[" << job.pid << "](done) " << job.cmd.command
+			std::cout << "[" << job.pid << "] Done " << job.cmd.command
 			          << '\n';
 		}
 
@@ -164,10 +164,10 @@ std::list<Shelly::job> Shelly::jobs_list(bool completed)
 		return background_jobs;
 	}
 
-	// Get completed jobs and remove them from the background_jobs list
 	std::list<Shelly::job> completed_jobs;
 	std::list<Shelly::job>::iterator it;
 
+	// Get completed jobs and splice them into the completed_jobs list
 	for (it = background_jobs.begin(); it != background_jobs.end(); ++it)
 	{
 		// Check if the process is not done yet
