@@ -34,7 +34,8 @@ int Shelly::start()
 		// List out any jobs that have completed
 		for (auto job : jobs_list(true))
 		{
-			std::cout << "[" << job.pid << "] Done " << job.cmd.command << '\n';
+			std::cout << "[" << job.pid << "] Done : " << job.cmd.command
+			          << '\n';
 		}
 
 		// Ignore empty inputs
