@@ -79,6 +79,13 @@ class Shelly
 		 */
 		virtual int execute(command);
 
+		/**
+		 * Terminate all background jobs
+		 */
+		virtual void termiate_jobs();
+
+
+
 	protected:
 
 		/**

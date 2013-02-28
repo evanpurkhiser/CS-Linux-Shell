@@ -59,7 +59,7 @@ namespace commands
 
 	int killall(Shelly *shell, Shelly::command *cmd)
 	{
-
+		shell->termiate_jobs();
 	}
 
 	int pause(Shelly *shell, Shelly::command *cmd)

@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <cstdlib>
+#include <csignal>
 #include <iterator>
 #include <iostream>
 #include <sstream>
@@ -41,7 +42,7 @@ int Shelly::start()
 
 void Shelly::finish()
 {
-	commands::killall(this, {});
+	termiate_jobs();
 	exit = true;
 }
 
@@ -128,13 +129,24 @@ int Shelly::execute(Shelly::command command)
 		if (command.background)
 		{
 			background_jobs.push_back({command, pid});
-			std::cout << "PID: [" << pid << "] " << command.command << '\n';
+			std::cout << "[" << pid << "] " << command.command << '\n';
 		}
 		else
 		{
 			wait(0);
 		}
 	}
+}
+
+void Shelly::termiate_jobs()
+{
+	for (auto job : background_jobs)
+	{
+		kill(job.pid, SIGTERM);
+		wait(0);
+	}
+
+	background_jobs.clear();
 }
 
 /**
