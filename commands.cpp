@@ -81,7 +81,14 @@ namespace commands
 
 	int dir(Shelly *, Shelly::command *cmd)
 	{
-		return system(("/bin/ls -l " + cmd->argv[1]).c_str());
+		std::string path;
+
+		if (cmd->argc > 1)
+		{
+			path = cmd->argv[1];
+		}
+
+		return system(("/bin/ls -l " + path).c_str());
 	}
 
 	int cd(Shelly *, Shelly::command *cmd)
