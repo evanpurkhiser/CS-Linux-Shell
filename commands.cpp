@@ -81,12 +81,7 @@ namespace commands
 
 	int dir(Shelly *, Shelly::command *cmd)
 	{
-		std::string path;
-
-		if (cmd->argc > 1)
-		{
-			path = cmd->argv[1];
-		}
+		std::string path = cmd->argc > 1 ? cmd->argv[1] : ".";
 
 		return system(("/bin/ls -l " + path).c_str());
 	}
