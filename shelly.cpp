@@ -6,6 +6,7 @@
 #include <string>
 #include <list>
 #include <sys/wait.h>
+#include <unistd.h>
 
 #include "shelly.hpp"
 #include "commands.hpp"
