@@ -88,9 +88,9 @@ Shelly::command Shelly::parse_command(std::string input_command)
 	// We also want the arguments as a vector of C style strings
 	std::vector<const char *> argv_c;
 
-	for (int i = 0; i < argv.size(); ++i)
+	for (auto arg : argv)
 	{
-		argv_c.push_back(argv[i].c_str());
+		argv_c.push_back(arg.c_str());
 	}
 
 	command.command = input_command;
