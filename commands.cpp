@@ -41,12 +41,12 @@ namespace commands
 
 	int echo(Shelly *shell, Shelly::command *cmd)
 	{
-		for (int i = 1; i < cmd->argv.size(); ++i)
+		for (int i = 1; i < cmd->argc; ++i)
 		{
 			std::cout << cmd->argv[i] << " ";
 		}
 
-		if (cmd->argv.size() > 1)
+		if (cmd->argc > 1)
 		{
 			std::cout << '\n';
 		}
@@ -76,7 +76,7 @@ namespace commands
 
 	int cd(Shelly *shell, Shelly::command *cmd)
 	{
-		if (chdir(cmd->argv.size() < 2 ? getenv("HOME") : cmd->argv_c[1]) < 0)
+		if (chdir(cmd->argc < 2 ? getenv("HOME") : cmd->argv_c[1]) < 0)
 		{
 			std::cout << cmd->name << ": unable to change directory\n";
 		}
