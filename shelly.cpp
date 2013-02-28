@@ -1,12 +1,11 @@
-#include <algorithm>
 #include <cstdlib>
 #include <csignal>
 #include <iterator>
 #include <iostream>
 #include <sstream>
 #include <string>
-#include <sys/wait.h>
 #include <list>
+#include <sys/wait.h>
 
 #include "shelly.hpp"
 #include "commands.hpp"
