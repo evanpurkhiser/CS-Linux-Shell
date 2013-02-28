@@ -111,7 +111,7 @@ int Shelly::execute(Shelly::command command)
 	int status = 0;
 
 	// Check if the command is a built in function of the shell
-	int(*internal_command)(Shelly &, Shelly::command &);
+	int(*internal_command)(Shelly &, const Shelly::command &);
 
 	if ((internal_command = commands::internal[command.name]) != 0)
 	{
