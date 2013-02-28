@@ -109,6 +109,8 @@ int Shelly::execute(std::string input_command)
 
 int Shelly::execute(Shelly::command command)
 {
+	int status = 0;
+
 	// Check if the command is a built in function of the shell
 	int(*internal_command)(Shelly *, Shelly::command *);
 
@@ -141,7 +143,7 @@ int Shelly::execute(Shelly::command command)
 				background_jobs.push_back({command, pid});
 				std::cout << "[" << pid << "] " << command.command << '\n';
 
-				return 0;
+				return status;
 			}
 
 			// Let the user know only so many commands may be run in the bg
@@ -150,8 +152,10 @@ int Shelly::execute(Shelly::command command)
 			          << "Executing " << command.name << " in the foreground\n";
 		}
 
-		wait(0);
+		wait(&status);
 	}
+
+	return status;
 }
 
 void Shelly::termiate_jobs()
