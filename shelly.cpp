@@ -136,13 +136,21 @@ int Shelly::execute(Shelly::command command)
 	{
 		if (command.background)
 		{
-			background_jobs.push_back({command, pid});
-			std::cout << "[" << pid << "] " << command.command << '\n';
+			if (background_jobs.size() < Shelly::MAX_BG_JOBS)
+			{
+				background_jobs.push_back({command, pid});
+				std::cout << "[" << pid << "] " << command.command << '\n';
+
+				return 0;
+			}
+
+			// Let the user know only so many commands may be run in the bg
+			std::cerr << "No more than " << Shelly::MAX_BG_JOBS
+			          << " background jobs may be run at once.\n"
+			          << "Executing " << command.name << " in the foreground\n";
 		}
-		else
-		{
-			wait(0);
-		}
+
+		wait(0);
 	}
 }
 

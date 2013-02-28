@@ -10,6 +10,11 @@ class Shelly
 	public:
 
 		/**
+		 * Hard limit on the number of background jobs that may be run
+		 */
+		static const int MAX_BG_JOBS = 3;
+
+		/**
 		 * Defines a command
 		 */
 		struct command
