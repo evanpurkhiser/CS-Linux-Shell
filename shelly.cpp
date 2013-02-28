@@ -6,6 +6,7 @@
 #include <sstream>
 #include <string>
 #include <sys/wait.h>
+#include <list>
 
 #include "shelly.hpp"
 #include "commands.hpp"
@@ -28,6 +29,13 @@ int Shelly::start()
 		if (std::cin.eof())
 		{
 			std::cout << (input_command = "exit") << '\n';
+		}
+
+		// List out any jobs that have completed
+		for (auto job : jobs_list(true))
+		{
+			std::cout << "[" << job.pid << "](done) " << job.cmd.command
+			          << '\n';
 		}
 
 		// Ignore empty inputs
@@ -157,6 +165,18 @@ std::list<Shelly::job> Shelly::jobs_list(bool completed)
 	}
 
 	// Get completed jobs and remove them from the background_jobs list
+	std::list<Shelly::job> completed_jobs;
+	std::list<Shelly::job>::iterator it;
+
+	for (it = background_jobs.begin(); it != background_jobs.end(); ++it)
+	{
+		// Check if the process is not done yet
+		if (waitpid(it->pid, 0, WNOHANG) == 0) continue;
+
+		completed_jobs.splice(completed_jobs.end(), background_jobs, it--);
+	}
+
+	return completed_jobs;
 }
 
 /**
