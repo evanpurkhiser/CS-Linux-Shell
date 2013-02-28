@@ -100,9 +100,12 @@ namespace commands
 
 	int jobs(Shelly &shell, const Shelly::command &)
 	{
-		for (auto job : shell.jobs_list())
+		std::list<Shelly::job> jobs = shell.jobs_list();
+		std::list<Shelly::job>::iterator it;
+
+		for (it = jobs.begin(); it != jobs.end(); ++it)
 		{
-			std::cout << "[" << job.pid << "] " << job.cmd.command << '\n';
+			std::cout << "[" << it->pid << "] " << it->cmd.command << '\n';
 		}
 
 		return 0;

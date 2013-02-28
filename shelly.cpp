@@ -32,9 +32,12 @@ int Shelly::start()
 		}
 
 		// List out any jobs that have completed
-		for (auto job : jobs_list(true))
+		std::list<Shelly::job> completed = jobs_list(true);
+		std::list<Shelly::job>::iterator it;
+
+		for (it = completed.begin(); it != completed.end(); ++it)
 		{
-			std::cout << "[" << job.pid << "] Done : " << job.cmd.command
+			std::cout << "[" << it->pid << "] Done : " << it->cmd.command
 			          << '\n';
 		}
 
@@ -69,7 +72,7 @@ Shelly::command Shelly::parse_command(std::string input_command)
 	command command;
 
 	// This command is a background job if the last character is a '&'
-	command.background = input_command.back() == '&';
+	command.background = *input_command.rbegin() == '&';
 
 	// Remove the background flag from the command string
 	if (command.background)
@@ -87,10 +90,11 @@ Shelly::command Shelly::parse_command(std::string input_command)
 
 	// We also want the arguments as a vector of C style strings
 	std::vector<const char *> argv_c;
+	std::vector<std::string>::iterator it;
 
-	for (auto arg : argv)
+	for (it = argv.begin(); it != argv.end(); ++it)
 	{
-		argv_c.push_back(arg.c_str());
+		argv_c.push_back(it->c_str());
 	}
 
 	command.command = input_command;
@@ -140,7 +144,9 @@ int Shelly::execute(Shelly::command command)
 		{
 			if (background_jobs.size() < Shelly::MAX_BG_JOBS)
 			{
-				background_jobs.push_back({command, pid});
+				Shelly::job job = {command, pid};
+
+				background_jobs.push_back(job);
 				std::cout << "[" << pid << "] " << command.command << '\n';
 
 				return status;
@@ -160,9 +166,11 @@ int Shelly::execute(Shelly::command command)
 
 void Shelly::terminate_jobs()
 {
-	for (auto job : background_jobs)
+	std::list<Shelly::job>::iterator it;
+
+	for (it = background_jobs.begin(); it != background_jobs.end(); ++it)
 	{
-		kill(job.pid, SIGTERM);
+		kill(it->pid, SIGTERM);
 		wait(0);
 	}
 
