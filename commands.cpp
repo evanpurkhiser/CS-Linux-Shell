@@ -89,6 +89,8 @@ namespace commands
 		if (chdir(cmd->argc < 2 ? getenv("HOME") : cmd->argv_c[1]) < 0)
 		{
 			std::cout << cmd->name << ": unable to change directory\n";
+
+			return 1;
 		}
 
 		return 0;
