@@ -26,6 +26,14 @@ That's it! You can now run the Shelly binary
 
     $ ./bin/shelly
 
+### Shelly Manual
+
+Shelly includes a man page for more information on usage. You can view the
+manual from within shelly by executing the internal `help` command. You may
+also view the man page by specifying the man file for `man` manually.
+
+    $ man ./shelly.1
+
 ### License
 
 This software is licensed under the MIT License. See the
