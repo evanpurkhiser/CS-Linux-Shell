@@ -7,7 +7,7 @@
 
 namespace commands
 {
-	std::map<std::string, int(*)(Shelly *, Shelly::command *)> internal =
+	std::map<std::string, int(*)(Shelly &, Shelly::command &)> internal =
 	{
 		{"quit",    &quit},
 		{"exit",    &quit},
@@ -23,14 +23,14 @@ namespace commands
 		{"environ", &environ},
 	};
 
-	int quit(Shelly *shell, Shelly::command *)
+	int quit(Shelly &shell, Shelly::command &)
 	{
-		shell->finish();
+		shell.finish();
 
 		return 0;
 	}
 
-	int help(Shelly *, Shelly::command *)
+	int help(Shelly &, Shelly::command &)
 	{
 		// Get the path to the manual page
 		char bin_path[1024];
@@ -41,14 +41,14 @@ namespace commands
 		return system(("/usr/bin/man " + path).c_str());
 	}
 
-	int echo(Shelly *, Shelly::command *cmd)
+	int echo(Shelly &, Shelly::command &cmd)
 	{
-		for (int i = 1; i < cmd->argc; ++i)
+		for (int i = 1; i < cmd.argc; ++i)
 		{
-			std::cout << cmd->argv[i] << " ";
+			std::cout << cmd.argv[i] << " ";
 		}
 
-		if (cmd->argc > 1)
+		if (cmd.argc > 1)
 		{
 			std::cout << '\n';
 		}
@@ -56,21 +56,21 @@ namespace commands
 		return 0;
 	}
 
-	int clr(Shelly *, Shelly::command *)
+	int clr(Shelly &, Shelly::command &)
 	{
 		std::cout << "\033[2J\033[1;1H";
 
 		return 0;
 	}
 
-	int killall(Shelly *shell, Shelly::command *)
+	int killall(Shelly &shell, Shelly::command &)
 	{
-		shell->termiate_jobs();
+		shell.termiate_jobs();
 
 		return 0;
 	}
 
-	int pause(Shelly *, Shelly::command *)
+	int pause(Shelly &, Shelly::command &)
 	{
 		std::cout << "Console paused. Press <ENTER> to resume.";
 
@@ -79,18 +79,18 @@ namespace commands
 		return 0;
 	}
 
-	int dir(Shelly *, Shelly::command *cmd)
+	int dir(Shelly &, Shelly::command &cmd)
 	{
-		std::string path = cmd->argc > 1 ? cmd->argv[1] : ".";
+		std::string path = cmd.argc > 1 ? cmd.argv[1] : ".";
 
 		return system(("/bin/ls -l " + path).c_str());
 	}
 
-	int cd(Shelly *, Shelly::command *cmd)
+	int cd(Shelly &, Shelly::command &cmd)
 	{
-		if (chdir(cmd->argc < 2 ? getenv("HOME") : cmd->argv_c[1]) < 0)
+		if (chdir(cmd.argc < 2 ? getenv("HOME") : cmd.argv_c[1]) < 0)
 		{
-			std::cout << cmd->name << ": unable to change directory\n";
+			std::cout << cmd.name << ": unable to change directory\n";
 
 			return 1;
 		}
@@ -98,9 +98,9 @@ namespace commands
 		return 0;
 	}
 
-	int jobs(Shelly *shell, Shelly::command *)
+	int jobs(Shelly &shell, Shelly::command &)
 	{
-		for (auto job : shell->jobs_list())
+		for (auto job : shell.jobs_list())
 		{
 			std::cout << "[" << job.pid << "] " << job.cmd.command << '\n';
 		}
@@ -108,7 +108,7 @@ namespace commands
 		return 0;
 	}
 
-	int environ(Shelly *, Shelly::command *)
+	int environ(Shelly &, Shelly::command &)
 	{
 		const std::string shell_token = "SHELL=";
 
