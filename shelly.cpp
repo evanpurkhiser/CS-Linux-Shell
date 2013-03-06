@@ -50,7 +50,7 @@ int Shelly::start()
 
 void Shelly::finish()
 {
-	termiate_jobs();
+	terminate_jobs();
 	exit = true;
 }
 
@@ -158,7 +158,7 @@ int Shelly::execute(Shelly::command command)
 	return status;
 }
 
-void Shelly::termiate_jobs()
+void Shelly::terminate_jobs()
 {
 	for (auto job : background_jobs)
 	{

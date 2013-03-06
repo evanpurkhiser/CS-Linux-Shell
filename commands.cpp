@@ -65,7 +65,7 @@ namespace commands
 
 	int killall(Shelly &shell, const Shelly::command &)
 	{
-		shell.termiate_jobs();
+		shell.terminate_jobs();
 
 		return 0;
 	}

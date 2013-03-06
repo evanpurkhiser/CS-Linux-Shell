@@ -87,7 +87,7 @@ class Shelly
 		/**
 		 * Terminate all background jobs
 		 */
-		virtual void termiate_jobs();
+		virtual void terminate_jobs();
 
 		/**
 		 * Return a list of background jobs. When only completed background
