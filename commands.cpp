@@ -7,7 +7,7 @@
 
 namespace commands
 {
-	std::map<std::string, int(*)(Shelly &, const Shelly::command &)> internal =
+	std::map<std::string, internal_function> internal =
 	{
 		{"quit",    &quit},
 		{"exit",    &quit},

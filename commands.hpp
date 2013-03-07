@@ -8,11 +8,12 @@
 
 namespace commands
 {
+	typedef int(*internal_function)(Shelly &, const Shelly::command &);
+
 	/**
 	 * Get a list of the internal commands
 	 */
-	extern std::map<std::string, int(*)(Shelly &, const Shelly::command &)>
-	internal;
+	extern std::map<std::string, internal_function> internal;
 
 	/**
 	 * Terminate the shell after killing all children processes.

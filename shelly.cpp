@@ -112,11 +112,11 @@ int Shelly::execute(Shelly::command command)
 	int status = 0;
 
 	// Check if the command is a built in function of the shell
-	int(*internal_command)(Shelly &, const Shelly::command &);
+	commands::internal_function built_in = commands::internal[command.name];
 
-	if ((internal_command = commands::internal[command.name]) != 0)
+	if (built_in != 0)
 	{
-		return internal_command(*this, command);
+		return built_in(*this, command);
 	}
 
 	int pid = fork();
