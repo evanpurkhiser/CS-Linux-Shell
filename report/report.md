@@ -178,6 +178,24 @@ to determine if each of the background processes has completed execution or not.
 The pruned jobs will then be printed to `STDOUT` notifying the user of which
 background processes have completed.
 
+### The built in `man` page
+
+The manual for _Shelly_ was written in the `man` syntax and may be displayed
+by passing the path to the manual page to the `man` command like so.
+
+    man ./shelly.1
+
+The manual page may also be viewed in shelly itself by executing the internal
+`help` command. Do note however, there is a small caveat to this. Shelly expects
+the `shelly.1` man page file to be one directory below where the `shelly`
+executable is stored (usually in the `bin` directory above the source). If the
+executable is moved then the help page will fail to display.
+
+Unfortunately this is a difficult problem to solve. The only two viable
+solutions are to either embed the man page into the the source of the program,
+or to install the man page into the system wide man page directory. However this
+is out of the scope of this project.
+
 ## Final thoughts
 
 This project was actually rather fun to work on. While I had been exposed to
